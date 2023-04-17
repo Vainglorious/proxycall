@@ -1,0 +1,31 @@
+<html>
+
+<head>
+  <title>Proxy call</title>
+  <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js" type="application/javascript"></script>
+</head>
+
+<body>
+  <h1>Proxy Call (withdraw)</h1>
+  <p>Function name:</p>
+  <input type="text" id="function-name" value="withdraw(uint256)" disabled />
+  <p>Enter the amount (in ether)</p>
+  <input type="text" id="amount" value="0.5" />
+  <p><button onclick="generate()">Generate Call Data</button></p>
+
+  <p>Result:</p>
+  <textarea id="result" rows="10" cols="80" readonly></textarea>
+
+  <script>
+    function generate() {
+      const amount = document.getElementById("amount").value;
+
+      const ABI = ["function withdraw(uint256)"];
+      const iface = new ethers.utils.Interface(ABI);
+      const result = iface.encodeFunctionData("withdraw", [ethers.utils.parseEther(amount)]);
+      document.getElementById("result").value = result;
+    }
+  </script>
+</body>
+
+</html>
